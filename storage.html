@@ -1,0 +1,27 @@
+<html>
+    <body>
+        <form onsubmit="saveTolocalStorage(event)">
+            <label>NAME</label>
+           <div> <input type="text" name="username" required/></div>
+           <div> <label>EMAIL ID</label></div>
+           <div> <input type="email" name="emailId" required/></dia>
+            <div><label>PHONE NO.</label></div>
+           <div> <input type="tel"  name="phonenumber"  /></div>
+            <button>submit</button>
+
+        </form>
+        <script>
+            function saveTolocalStorage(event){
+                event.preventDefault();
+                const name=event.target.username.value;
+                const email=event.target.emailId.value;
+                const phonenumber=event.target.phonenumber.value;
+                localStorage.setItem('name',name);
+                localStorage.setItem('email',email);
+                localStorage.setItem('phonenumber',phonenumber);
+            }
+        </script>
+
+
+    </body>
+</html>
