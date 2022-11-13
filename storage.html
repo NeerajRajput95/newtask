@@ -2,11 +2,11 @@
     <body>
         <form onsubmit="saveTolocalStorage(event)">
             <label>NAME</label>
-           <div> <input type="text" name="username" required/></div>
+           <div> <input id="username" type="text" name="username" required/></div>
            <div> <label>EMAIL ID</label></div>
-           <div> <input type="email" name="emailId" required/></dia>
+           <div> <input id="emailId" type="email" name="emailId" required/></dia>
             <div><label>PHONE NO.</label></div>
-           <div> <input type="tel"  name="phonenumber"  /></div>
+           <div> <input id="phonenumber" type="tel"  name="phonenumber"  /></div>
             <button>submit</button>
 
         </form>
@@ -31,8 +31,30 @@
             }
             function ShowNewUserOnScreen(user){
                 const parentNode =document.getElementById('listOfUser');
-                const childHTML=`<li> ${user.name} - ${user.email} - ${user.phonenumber}</li>`
+                const childHTML=`<li id=${user.email}> ${user.name} - ${user.email} - ${user.phonenumber}
+                     <button onclick=deleteUser('${user.email}')>delete user</button>
+                     <button onclick=editUserDetails('${user.email}','${user.name}','${user.phonenumber}')>edit user</button>
+                    </li>`
                 parentNode.innerHTML=parentNode.innerHTML+childHTML;
+            }
+            function deleteUser(emailId){
+                console.log(emailId);
+                localStorage.removeItem(emailId);
+                removeUserFromScreen(emailId);
+            }
+            function removeUserFromScreen(emailId){
+                const parentNode=document.getElementById('listOfUser');
+                const childNodeTOBeDeleted=document.getElementById(emailId);
+                parentNode.removeChild(childNodeTOBeDeleted);
+
+            }
+            function editUserDetails(emailId,name,phonenumber){
+                document.getElementById('emailId').value=emailId;
+                document.getElementById('username').value=name;
+                document.getElementById('phonenumber').value=phonenumber;
+                deleteUser(emailId);
+
+
             }
         </script>
 
